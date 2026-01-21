@@ -16,7 +16,7 @@ class PostController extends Controller
         $posts = Post::latest()->paginate(5);
     
 
-        return view('dashboard',[
+        return view('post.index',[
             'posts'=> $posts
         ]);
     }
@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -34,7 +34,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->file());
     }
 
     /**

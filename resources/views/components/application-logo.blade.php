@@ -1,1 +1,1 @@
-<img src="logo.svg" class="h-4 ">
+<img src={{ asset('logo.svg') }} class="h-4 ">
