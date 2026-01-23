@@ -22,11 +22,26 @@
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
+        <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
+        </div>
+
+        <!-- Avatar-->
+        <div>
+            <x-input-label for="Avatar" :value="__('Avatar')" />
+            <x-text-input id="Avatar" class="block mt-1 w-full" type="file" name="Avatar"
+                          autofocus />
+            <x-input-error :messages="$errors->get('Avatar')" class="mt-2" />
+        </div>
+
 
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
+
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -45,7 +60,14 @@
                     @endif
                 </div>
             @endif
+            <x-input-label for="bio" :value="__('bio')" />
+            <x-input-textarea id="bio" class="block mt-1 w-full " name="bio">
+                {{old('bio')}}</x-input-textarea>
+            <x-input-error :messages="$errors->get('bio')" class="mt-2" />
+
+
         </div>
+
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

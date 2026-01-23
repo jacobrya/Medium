@@ -20,7 +20,7 @@
                             <!-- Image-->
                             <div>
                                 <x-input-label for="image" :value="__('Image')" />
-                                <x-text-input id="image" class="block mt-1 w-full" type="file" name="image"
+                                <x-text-input id="image" class="block mt-1 w-full " type="file" name="image"
                                     autofocus />
                                 <x-input-error :messages="$errors->get('image')" class="mt-2" />
                             </div>
