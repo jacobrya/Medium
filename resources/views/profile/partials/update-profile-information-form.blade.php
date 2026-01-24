@@ -16,13 +16,8 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
-        @if($user->image)
-    <div>
-        Profile Photo
-        <img src="{{Storage::url($user->image)}}" class="rounded h-20 w-20">
-    </div>
-
-        @endif
+        Avatar
+       <x-user-avatar :user="$user" class="w-20 h-20 rounded-full mb-4"/>
 
         <div>
             <x-input-label for="name" :value="__('Name')" />

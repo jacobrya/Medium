@@ -6,15 +6,11 @@
                     <h1 class="text-3xl mb-4">{{$post->title}}</h1>
 
                     <div class="flex gap-4 mb-6">
-                        @if($post->user->image)
-                            <img class='h-20 w-20 rounded-full object-cover' src="{{Storage::url($post->user->image)}}">
-                        @else
-                            <img class='h-20 w-20 rounded-full object-cover' src="https://www.shutterstock.com/shutterstock/photos/1290549613/display_1500/stock-vector-vector-illustration-of-avatar-and-dummy-sign-collection-of-avatar-and-image-stock-vector-1290549613.jpg">
-                        @endif
+                      <x-user-avatar :user="$post->user" />
 
                         <div>
                             <div class="flex gap-2">
-                                <h3>{{$post->user->name}}</h3>
+                                <a href="{{route('profile.show',$post->user)}}" class="hover:underline">{{$post->user->name}}</a>
                                 &middot;
                                 <a href="#" class="text-emerald-500">Follow</a>
                             </div>
