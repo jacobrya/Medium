@@ -19,20 +19,7 @@
                         </div>
 
                     </div>
-                    <div
-                        x-data="{
-        following: {{ $user->isFollowedBy(auth()->user()) ? 'true' : 'false' }},
-        followerCount: {{ $user->followers->count() }},
-        follow() {
-            axios.post('{{ route('follow', $user) }}')
-                .then(res => {
-                    this.following = !this.following;
-                    this.followerCount = res.data.followers_count;
-                })
-                .catch(err => console.log(err));
-        }
-    }"
-                        class="w-[320px] border-l px-8">
+                    <x-follow-ctr :user="$user">
 
                         <x-user-avatar :user="$user" class="w-32 h-32 rounded-full mb-4"/>
                         <h3>{{$user->name}}</h3>
@@ -53,7 +40,7 @@
                                 </div>
                             @endif
                         @endauth
-                    </div>
+                    </x-follow-ctr>
                 </div>
             </div>
         </div>

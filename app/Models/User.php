@@ -64,6 +64,14 @@ class  User extends Authenticatable implements MustVerifyEmail
     public function isFollowedBy(User $user){
         return $this->followers()->where('follower_id',$user->id)->exists();
     }
+    public function hasClapped(Post $post){
+        return $this->claps()->where('post_id',$post->id)->exists();
+    }
+
+    public function claps(){
+        return $this->hasMany(Clap::class);
+    }
+
 
 
 }

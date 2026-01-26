@@ -32,4 +32,8 @@ class Post extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    public function claps(){
+        return $this->hasMany(Clap::class);
+    }
+
 }
