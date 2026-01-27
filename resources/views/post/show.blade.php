@@ -23,16 +23,32 @@
                                 &middot;
                                 <span>{{$post->created_at->format('M d, Y')}}</span>
                             </div>
+
                         </div>
+
+
                     </div>
+                    @if($post->user->id === auth()->id())
+                    <div class="mt-4 mb-6 border-t pt-4 border-radius-lg flex gap-4">
+                        <x-primary-button href="{{route('post.edit',$post->slug)}}">Edit Post</x-primary-button>
+                        <form action="{{route('post.destroy',$post)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <x-danger-button>Delete Post</x-danger-button>
+                        </form>
+
+
+
+                    </div>
+                    @endif
                     <x-clap-button :count="$post->claps()->count()" :post="$post" />
 
-                    {{-- Изображение поста --}}
+
                     <div class="mt-6">
                         <img class="w-full rounded-lg" src="{{Storage::url($post->image)}}" alt="{{$post->title}}">
                     </div>
 
-                    {{-- Контент поста --}}
+
                     <div class="mt-6 prose max-w-none mb-10">
                         {!! $post->content !!}
                     </div>

@@ -23,8 +23,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/category/{category}', [PostController::class, 'category'])->name('post.byCategory');
     Route::get('post/create', [PostController::class, 'create'])->name('post.create');
+    Route::get('/my-posts', [PostController::class, 'myPosts'])->name('post.myPosts');
 
     Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
+    Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::get('/post/{post:slug}', [PostController::class, 'edit'])->name('post.edit');
+    Route::put('/post/{post}', [PostController::class, 'update'])->name('post.update');
 
 
     Route::post('/follow/{user}', [FollowerController::class, 'followUnfollow'])->name('follow');

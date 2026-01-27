@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 
 use App\Models\Post;
@@ -49,7 +50,7 @@ class PostController extends Controller
          $image = $data['image'];
          unset($data['image']);
          $data['user_id'] = auth()->id();
-         $data['slug'] = Str::slug($data['title']);
+
 
          $ImagePath = $image->store('posts','public');
          $data['image'] = $ImagePath;
@@ -73,15 +74,34 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        if(auth()->id() !== $post->user_id){
+            abort(403);
+        }
+        $categories = Category::get();
+        return view('post.edit',[
+            'post' => $post,
+            'categories'=> $categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        //
+        if(auth()->id() !== $post->user_id){
+            abort(403);
+        }
+        $data = $request->validated();
+        $post->update($data);
+        if($data['image'] ?? false){
+            $image = $data['image'];
+            $ImagePath = $image->store('posts','public');
+            $post->image = $ImagePath;
+            $post->save();
+
+        }
+        return redirect()->route('post.myPosts');
     }
 
     /**
@@ -89,7 +109,20 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        if(auth()->id() !== $post->user_id){
+            abort(403);
+        }
+        $post->delete();
+        return redirect()->route('post.myPosts');
+
+    }
+    public function myPosts()
+    {
+        $user = auth()->user();
+        $posts = $user->posts()->latest()->simplePaginate(5);
+        return view('post.my-index',[
+            'posts'=> $posts
+        ]);
     }
     public function category(Category $category)
     {

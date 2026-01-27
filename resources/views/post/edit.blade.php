@@ -1,18 +1,21 @@
 <x-app-layout>
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h1 class="text-3xl mb-4">Create new Post</h1>
+            <h1 class="text-3xl mb-4">Update Post : <strong>{{$post->title}}</strong></h1>
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('post.update',$post->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        @method('put')
                         <div>
+                            <img class='h-full mb-8 w-full object-cover' src="{{Storage::url($post->image)}}">
                             <div class="mt-4">
                                 <x-input-label for="category_id" :value="__('category_id')" />
                                 <select id="category_id" name="category_id" class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                     <option value="">Select a Category</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>{{$category->name }}</option>
+                                        <option value="{{ $category->id }}" @selected(old('category_id',$post->category_id) == $category->id)>{{$category->name }}</option>
                                     @endforeach
                                 </select>
                                 <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
@@ -30,15 +33,15 @@
                             <div class="mt-4">
                                 <x-input-label for="title" :value="__('Title')" />
                                 <x-text-input id="title" class="block mt-1 w-full" type="text" name="title"
-                                    :value="old('title')"  autofocus />
+                                    :value="old('title', $post->title)"  autofocus />
                                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
                             </div>
                             <!-- content -->
                                 <div class="mt-4">
                                     <x-input-label for="Content" :value="__('Content')" />
                                     <x-input-textarea id="Content" class="block mt-1 w-full" name="content">
-                                        {{old('content')}}</x-input-textarea>
-                                    <x-input-error :messages="$errors->get('content')" class="mt-2" />
+                                        {{old('content',$post->content)}}</x-input-textarea>
+                                    <x-input-error :messages="$errors->get('content',$post->content   )" class="mt-2" />
                                 </div>
                         </div>
                         <x-primary-button class="mt-4">

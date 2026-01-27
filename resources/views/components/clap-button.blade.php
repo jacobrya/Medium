@@ -13,7 +13,7 @@
                 console.error(error);
             });
     }
-}" class="border-t border-b flex">
+}" class=" flex">
     <button class="py-4 flex gap-2 text-gray-500" @click="clap()">
 
         <svg x-show="!hasClapped"

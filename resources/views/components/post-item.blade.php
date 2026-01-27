@@ -2,7 +2,7 @@
 <div class="flex mt-8 bg-white border border-gray-200 rounded-lg shadow-sm">
     <div class="p-5 flex-1">
 
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+            <h5 class="mb-2 text-2xl font-bold  text-gray-900">
                 {{ $post->title }}
             </h5>
 
@@ -15,10 +15,24 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
             </svg>
         </x-primary-button>
+        <div class="flex items-center mt-4 gap-4">
+
+            <span>{{$post->created_at->format('M d, Y')}}</span>
+
+            <x-clap-button :count="$post->claps()->count()" :post="$post" />
+
+
+        </div>
+        <div>
+            By <a href="{{ route('profile.show', $post->user) }}" class="hover:underline">{{ $post->user->name }}</a>
+        </div>
 
     </div>
 
         <img class="rounded-r-lg object-cover w-48 h-48" src={{Storage::url($post->image)}} alt="" />
 
+
 </div>
+
+
     </x-post-link>
