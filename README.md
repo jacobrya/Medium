@@ -21,8 +21,8 @@ A modern blogging platform built with **Laravel 12**, **Tailwind CSS**, and **Al
 ## Tech Stack
 
 - **Backend**: Laravel 12 (PHP 8.2+)
-- **Frontend**: Blade Templates, Tailwind CSS, Vite
-- **Database**: MySQL / SQLite
+- **Frontend**: Blade Templates, Tailwind CSS, Vite, Alpine.js
+- **Database**: MySQL
 - **Dependencies**:
   - `spatie/laravel-sluggable`: For generating unique slugs for posts.
   - `laravel/breeze`: For authentication scaffolding.
@@ -89,10 +89,5 @@ Follow these steps to set up the project locally:
 - **Create Post**: Go to "Write" or your dashboard to draft a new story.
 - **Profile**: Visit `http://localhost:8000/@your_username` to see your public profile.
 
-## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
